@@ -29,10 +29,7 @@ pretrain/
 *.npy
 *.npz
 
-# 默认忽略所有 jsonl/json 结果，避免误传大文件
-# 如需保留小样例，在文件末尾用 ! 加例外
-*.jsonl
-*.json
+# 默认忽略所有 jsonl/json 结果
 
 # ---------- 运行输出 ----------
 replay_out/
@@ -57,3 +54,7 @@ replay_summary.*
 .vscode/
 .idea/
 *.swp
+
+# ---------- 放行 datasets/ ----------
+!datasets/
+!datasets/**
