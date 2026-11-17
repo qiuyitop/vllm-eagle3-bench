@@ -27,6 +27,7 @@
 ---
 
 ## 工作流
+
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │ 0. 新机器：给 vLLM 打一次 observe hook │
@@ -101,7 +102,7 @@ python3 install_observe_hook.py
 ```
 输出 patched /.../vllm/v1/spec_decode/metrics.py 即成功。
 
-1. 终端 A：起服务
+### 1. 终端 A：起服务
 ```
 cd ~/vllm-eagle3-bench
 ./serve_k.sh 3
@@ -110,7 +111,7 @@ cd ~/vllm-eagle3-bench
 speculative-config: {"method": "eagle3", "model": "...", "num_speculative_tokens": 3, ...}
 且不能出现 stats_reporting_level（vLLM 0.27.1 不支持）。
 
-2. 终端 B：压测 + 回放
+### 2. 终端 B：压测 + 回放
 ```
 source /root/autodl-tmp/venv/bin/activate
 cd ~/vllm-eagle3-bench
@@ -125,19 +126,22 @@ T=0.7 ./run_c1_replay.sh alpaca
 ```
 每个数据集独立存放结果，不会互相覆盖。
 
-3. 已有 steps 时只重跑回放
-```
+### 3. 已有 steps 时只重跑回放
+```bash
 # 全部数据集
 ./replay_existing.sh
 ```
+
+```bash
 # 单个数据集 / 自定义策略
-```
 python3 replay.py \
   --steps /root/autodl-tmp/datasets/week1_results/steps_alpaca_k3_t0_c1.jsonl \
   --out-dir /root/autodl-tmp/datasets/week1_results/replay_alpaca_custom \
   --rules B3,R1,R2,U
 ```
-脚本说明
+
+## 脚本说明
+
 | 脚本 | 作用 | 关键环境变量 | 备注 |
 |---|---|---|---|
 | `serve_k.sh <0\|1\|2\|3>` | 启动 vLLM；`k=0` 关闭投机解码 | `MODEL` `DRAFT` `PORT` `MAX_NUM_SEQS` `GPU_MEM` | 参数为 `num_speculative_tokens` |
@@ -188,10 +192,9 @@ est_tok_s = total_tokens / (total_time_ms / 1000)
 ```
 这是解析估算，不是实测 tok/s；用于在同一份日志上横向比较策略相对优劣。
 
-输出格式
+## 输出格式
 steps.jsonl（每行一个 decode step）
-```
-json
+```json
 {
   "run_id": "alpaca_k3_t0_c1",
   "req_id": "req-0000",
@@ -204,7 +207,7 @@ json
   "pos0": 1, "pos1": 1, "pos2": 1
 }
 ```
-replay_summary.csv / .json
+### replay_summary.csv / .json
 | 字段 | 含义 |
 |---|---|
 | `rule` | 策略名 |
@@ -218,7 +221,7 @@ replay_summary.csv / .json
 | `waste_per_step` | 每步平均浪费 |
 > 每个策略另有 `replay_<RULE>_requests.jsonl`，含逐请求明细。
 
-数据集
+## 数据集
 convert_datasets.py 统一转换，输出 vLLM 所需的 {"prompt": "..."} jsonl：
 ```
 python3 convert_datasets.py alpaca
