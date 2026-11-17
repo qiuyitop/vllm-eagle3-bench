@@ -236,12 +236,6 @@ python3 convert_datasets.py all
 | `humaneval` | `datasets/humaneval/HumanEval.jsonl` | `datasets/humaneval/humaneval_vllm.jsonl` | 164 |
 | `mtbench_chat` | `datasets/mt_bench/mt_bench_prompts.jsonl` | `datasets/mt_bench/mtbench_chat_vllm.jsonl` | 160 |
 
-> ⚠️ **`run_bench.sh` 里 mtbench 的 `DATA_PATH` 当前指向
-> `/root/autodl-tmp/mt_bench/mtbench_chat_vllm.jsonl`（少了 `datasets/`），
-> 与转换脚本输出路径不一致。若用 `convert_datasets.py` 生成，请把
-> `run_bench.sh` 中该行改为
-> `/root/autodl-tmp/datasets/mt_bench/mtbench_chat_vllm.jsonl`，或跑 bench 时
-> 显式传 `DATA_PATH=...`。**
 
 ## 注意事项
 
