@@ -55,11 +55,12 @@ replay_summary.*
 .idea/
 *.swp
 
-# ---------- 放行 datasets/ ----------
-!datasets/
-!datasets/**
-
 # ---------- datasets 内部：只保留转换后的 jsonl ----------
 datasets/*/raw/
 datasets/*/results/
 datasets/**/.ipynb_checkpoints/
+
+# ---------- 例外：只放行 datasets 下需要的文件 ----------
+!datasets/
+!datasets/*/
+!datasets/*/*.jsonl
