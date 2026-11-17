@@ -58,3 +58,8 @@ replay_summary.*
 # ---------- 放行 datasets/ ----------
 !datasets/
 !datasets/**
+
+# ---------- datasets 内部：只保留转换后的 jsonl ----------
+datasets/*/raw/
+datasets/*/results/
+datasets/**/.ipynb_checkpoints/
