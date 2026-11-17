@@ -1,0 +1,59 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ---------- 虚拟环境 ----------
+venv/
+.venv/
+env/
+.env/
+
+# ---------- 数据 / 模型 / 大文件 ----------
+datasets/
+data/
+models/
+checkpoints/
+pretrain/
+*.pth
+*.pt
+*.ckpt
+*.bin
+*.safetensors
+*.onnx
+*.h5
+*.pkl
+*.npy
+*.npz
+
+# 默认忽略所有 jsonl/json 结果，避免误传大文件
+# 如需保留小样例，在文件末尾用 ! 加例外
+*.jsonl
+*.json
+
+# ---------- 运行输出 ----------
+replay_out/
+results/
+outputs/
+runs/
+work_dirs/
+tf-logs/
+observe*.jsonl
+steps_*.jsonl
+replay_summary.*
+
+# ---------- 日志 / 压缩包 ----------
+*.log
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# ---------- 系统 / IDE ----------
+.DS_Store
+.vscode/
+.idea/
+*.swp
